@@ -1,9 +1,6 @@
 import React from 'react';
-import { ScrollView, View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import {View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
-
-
-
 
 
 export default class TelaLogin extends React.Component {
@@ -36,7 +33,7 @@ export default class TelaLogin extends React.Component {
 
             <View style={styles.container} >
 
-                <Text style={styles.textoInput}>Digite seu usuário e senha para acessar!</Text>
+                <Text style={styles.textoInput}>Digite seu uaaAWWEsuário e senha para acessar!</Text>
                 <TextInput
                     style={styles.inputAcesso}
                     placeholder={"Usuário"}
@@ -132,7 +129,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
 
     },
-
 
     textoFacebook: {
         top: 55,
