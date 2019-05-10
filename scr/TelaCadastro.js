@@ -1,20 +1,31 @@
 import React from 'react';
 import firebase from 'firebase';
 
-import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, IDBDatabase } from 'react-native';
 
 export default class TelaCadastro extends React.Component {
 
-    cadastrarUsuario() {
-
+    writeUserData(userId, nome, email, senha, contato1, contato2) {
+        
+               
+        var userId = "";
+        var nome = "";
         var email = "";
-        var senha = ""
+        var senha = "";
+        var contato1 = "";
+        var contato2 = "";
 
-        const usuario = firebase.auth();
+        firebase.database().ref('users/' + userId).push({
 
-        usuario.createUserWithEmailAndPassword(
+            nome,
             email,
-            senha
+            senha,
+            contato1, 
+            contato2
+
+        }
+
+        
         ).catch(
             (erro) => {
 
@@ -28,7 +39,6 @@ export default class TelaCadastro extends React.Component {
             
         );
 
-        
 
         
     }
@@ -39,6 +49,14 @@ export default class TelaCadastro extends React.Component {
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
 
                 <Text style={styles.tituloCad}>Email e senha</Text>
+
+                <Text style={styles.textoCad}>Nome</Text>
+                <TextInput
+                    style={styles.inputCadastro}
+                    placeholder={"Nome"}
+                    onChangeText={nome => this.setState({ nome })}
+                    value={this.nome}
+                />
 
                 <Text style={styles.textoCad}>Email</Text>
                 <TextInput
@@ -63,24 +81,32 @@ export default class TelaCadastro extends React.Component {
                 <Text style={styles.textoInput}>Contato 1</Text>
                 <TextInput
                     style={styles.inputContato}
-                    placeholder={"Contato 1"} />
+                    placeholder={"Contato 1"}
+                    onChangeText={contato1 => this.setState({ contato1 })}
+                    value={this.contato1} />
 
                 <Text style={styles.textoInput}>Contato 2</Text>
                 <TextInput
                     style={styles.inputContato}
-                    placeholder={"Contato 2"} />
+                    placeholder={"Contato 2"}
+                    onChangeText={contato2 => this.setState({ contato2 })}
+                    value={this.contato2} />
 
 
-                <TouchableOpacity style={styles.botao} onPress={() => { this.cadastrarUsuario(); }}>
+                <TouchableOpacity style={styles.botao} onPress={() => { this.writeUserData(); }}>
                     <Text style={styles.textoBotao}  >Cadastrar</Text>
                 </TouchableOpacity>
 
             </KeyboardAvoidingView>
 
+             
+
         );
+        
 
         
     }
+   
 }
 
 
