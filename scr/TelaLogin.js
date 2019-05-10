@@ -4,7 +4,7 @@ import firebase from 'firebase';
 
 
 export default class TelaLogin extends React.Component {
-    static navigationOptions = { title: "TelaLogin" }
+    static navigationOptions = { title: "Login" }
 
     state = {
         email: '',
@@ -75,6 +75,13 @@ const styles = StyleSheet.create({
 
     },
 
+    navigationOptions: {
+        backgroundColor: "#ef3f67",
+        fontSize: 20,
+        fontWeight: 'bold',
+
+    },
+        
     inputAcesso: {
         top: -5,
         width: 250,
