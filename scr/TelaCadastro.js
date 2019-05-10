@@ -1,40 +1,52 @@
 import React from 'react';
+import firebase from 'firebase';
 
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
-
-
-
-
+import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 
 export default class TelaCadastro extends React.Component {
 
+    cadastrarUsuario() {
+
+        var email = "erika@gmail.com";
+        var senha = "12345678"
+
+        const usuario = firebase.auth();
+
+        usuario.createUserWithEmailAndPassword(
+            email,
+            senha
+        ).catch(
+            (erro) => {
+
+                var mensagemErro = "";
+                if (erro.code == "auth/weak-password") {
+                    mensagemErro = "A senha precisa ter no mínimo 6 caracteres!";
+                }
+
+                alert(mensagemErro);
+            }
+        );
+    }
 
     render() {
         return (
 
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
 
-
                 <Text style={styles.tituloCad}>Informações Pessoais</Text>
 
-                <Text style={styles.textoCad}>Nome</Text>
+                <Text style={styles.textoCad}>Usuário</Text>
                 <TextInput
                     style={styles.inputCadastro}
-                    placeholder={"Nome"} />
-
-
-                <Text style={styles.textoCad}>Email</Text>
-                <TextInput
-                    style={styles.inputCadastro}
-                    placeholder={"Email"} 
-                    />
+                    placeholder={"Usuário"}
+                />
 
                 <Text style={styles.textoCad}>Senha</Text>
                 <TextInput
                     style={styles.inputCadastro}
                     placeholder={"Senha"}
-                     />
-                    
+                />
+
                 <Text style={styles.tituloInformacoes}>Mais Informações</Text>
                 <Text style={styles.textoObs}>Nessa parte, você adicionára as informações de 5 contatos para ficarem cadastrado.
             Esses contatos serão notificados quando o botão de panico for acionado. Lembre-se de adicionar contatos de sua confiança!</Text>
@@ -50,7 +62,7 @@ export default class TelaCadastro extends React.Component {
                     placeholder={"Contato 2"} />
 
 
-                <TouchableOpacity style={styles.botao}>
+                <TouchableOpacity style={styles.botao} onPress={() => { this.cadastrarUsuario(); }}>
                     <Text style={styles.textoBotao}  >Cadastrar</Text>
                 </TouchableOpacity>
 

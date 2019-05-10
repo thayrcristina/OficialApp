@@ -22,7 +22,7 @@ export default class TelaLogin extends React.Component {
             this.setState({ isAuthenticated: true });
             console.log(user);
 
-        } catch (err) {
+        } catch (eerr) {
             console.log(err);
         }
     }
@@ -33,7 +33,7 @@ export default class TelaLogin extends React.Component {
 
             <View style={styles.container} >
 
-                <Text style={styles.textoInput}>Digite seu uaaAWWEsuário e senha para acessar!</Text>
+                <Text style={styles.textoInput}>Digite seu usuário e senha para acessar!</Text>
                 <TextInput
                     style={styles.inputAcesso}
                     placeholder={"Usuário"}
@@ -59,7 +59,7 @@ export default class TelaLogin extends React.Component {
                 </TouchableOpacity>
 
 
-                {this.state.isAuthenticated ? <Text>Logado com sucesso </Text> : null}
+                {this.state.isAuthenticated ? <Text style={styles.textoLogado} >Logado com sucesso </Text> : null}
             </View >
 
         );
@@ -92,6 +92,13 @@ const styles = StyleSheet.create({
         borderRadius: 2
 
     },
+
+    textoLogado:{
+        top: 10,
+        width: 250,
+        backgroundColor: "#ef3f67",
+    },
+
 
     cadastro: {
         top: 15,

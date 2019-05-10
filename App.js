@@ -5,9 +5,6 @@ import {AppRegistry, createBottomTabNavigator, createStackNavigator, createAppCo
 import TelaLogin from './scr/TelaLogin';
 import TelaCadastro from './scr/TelaCadastro'; 
 
-
-
-
 {
 var firebaseConfig = {
   apiKey: "AIzaSyBYkFtzcLsq2vjOKUh0c0hAHTJJ3nH0TfA",
@@ -22,14 +19,16 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 };
 
-const AppNavigator = createBottomTabNavigator({
 
-  Cadastro:{screen:TelaCadastro},
- 
+
+
+const AppNavigator = createStackNavigator({
+
   Login:{screen:TelaLogin},
-
+  Cadastro:{screen:TelaCadastro},
+  
+  
 });
 
-
-
 export default createAppContainer(AppNavigator);
+
