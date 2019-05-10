@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import {View, StyleSheet, Text, TextInput, TouchableOpacity, StatusBar } from 'react-native';
 import firebase from 'firebase';
 
 
@@ -32,6 +32,11 @@ export default class TelaLogin extends React.Component {
         return (
 
             <View style={styles.container} >
+
+
+                <StatusBar 
+                backgroundColor= "#ef3f67"/>
+
 
                 <Text style={styles.textoInput}>Digite seu usuário e senha para acessar!</Text>
                 <TextInput

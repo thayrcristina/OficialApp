@@ -7,8 +7,8 @@ export default class TelaCadastro extends React.Component {
 
     cadastrarUsuario() {
 
-        var email = "erika@gmail.com";
-        var senha = "12345678"
+        var email = "";
+        var senha = ""
 
         const usuario = firebase.auth();
 
@@ -25,7 +25,12 @@ export default class TelaCadastro extends React.Component {
 
                 alert(mensagemErro);
             }
+            
         );
+
+        
+
+        
     }
 
     render() {
@@ -33,18 +38,22 @@ export default class TelaCadastro extends React.Component {
 
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
 
-                <Text style={styles.tituloCad}>Informações Pessoais</Text>
+                <Text style={styles.tituloCad}>Email e senha</Text>
 
-                <Text style={styles.textoCad}>Usuário</Text>
+                <Text style={styles.textoCad}>Email</Text>
                 <TextInput
                     style={styles.inputCadastro}
-                    placeholder={"Usuário"}
+                    placeholder={"Email"}
+                    onChangeText={email => this.setState({ email })}
+                    value={this.email}
                 />
 
                 <Text style={styles.textoCad}>Senha</Text>
                 <TextInput
                     style={styles.inputCadastro}
                     placeholder={"Senha"}
+                    onChangeText={senha => this.setState({ senha })}
+                    value={this.senha}
                 />
 
                 <Text style={styles.tituloInformacoes}>Mais Informações</Text>
@@ -69,6 +78,8 @@ export default class TelaCadastro extends React.Component {
             </KeyboardAvoidingView>
 
         );
+
+        
     }
 }
 
