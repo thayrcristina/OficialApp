@@ -4,6 +4,8 @@ import {AppRegistry, createBottomTabNavigator, createStackNavigator, createAppCo
 
 import TelaLogin from './scr/TelaLogin';
 import TelaCadastro from './scr/TelaCadastro'; 
+import TelaPublicacoes from './scr/TelaPublicacoes';
+import TelaInicial from './scr/TelaInicial,'; 
 
 {
 var firebaseConfig = {
@@ -24,9 +26,10 @@ firebase.initializeApp(firebaseConfig);
 
 const AppNavigator = createStackNavigator({
 
-  Login:{screen:TelaLogin},
-  Cadastro:{screen:TelaCadastro},
-  
+  Login: {screen:TelaLogin},
+  Cadastro: {screen:TelaCadastro},
+  Inicio: {screen: TelaInicial},
+  Publicacoes: {screen:TelaPublicacoes}
   
 });
 

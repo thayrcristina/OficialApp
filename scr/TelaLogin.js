@@ -11,12 +11,12 @@ export default class TelaLogin extends React.Component {
         senha: '',
         isAuthenticated: false,
     };
-
     
     login = async () => {
 
         const { email, senha } = this.state;
 
+        
         try {
             const user = await firebase.auth().signInWithEmailAndPassword(email, senha);
 
@@ -26,6 +26,7 @@ export default class TelaLogin extends React.Component {
         } catch (eerr) {
             console.log(err);
         }
+        this.props.navigation.navigate("Inicio")
     }
 
     render() {
