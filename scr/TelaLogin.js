@@ -12,6 +12,7 @@ export default class TelaLogin extends React.Component {
         isAuthenticated: false,
     };
 
+    
     login = async () => {
 
         const { email, senha } = this.state;

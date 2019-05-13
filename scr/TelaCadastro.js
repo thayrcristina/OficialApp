@@ -1,45 +1,46 @@
 import React from 'react';
 import firebase from 'firebase';
 
-import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 
 export default class TelaCadastro extends React.Component {
 
     constructor(props) {
         super(props);
-        this.nome
-        this.email 
-        this.senha 
-        this.contato1 
-        this.contato2 
-      }
+        this.state = {
+            nome: '',
+            email: '',
+            senha: '',
+            contato1: '',
+            contato2: '',
 
-    writeUserData(nome, email, senha, contato1, contato2) {
-                
-        firebase.database().ref('users/').push({
-
-            nome,
-            email,
-            senha,
-            contato1, 
-            contato2
-
-        }
+        };
         
-        ).catch(
-            (erro) => {
+        this.cadastrologin = this.cadastrologin.bind(this);
+        firebase.auth().signOut();
+        
 
-                var mensagemErro = "";
-                if (erro.code == "auth/weak-password") {
-                    mensagemErro = "A senha precisa ter no mínimo 6 caracteres!";
-                }
-
-                alert(mensagemErro);
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                firebase.database().ref('Usuarios').child(user.uid).set({
+                    nome: this.state.nome,
+                    contato1: this.state.contato1, 
+                    contato2: this.state.contato2
+                });
+                alert("Conta Criada com Sucesso!");
             }
-            
-        );
+        });
+    }    
 
-    }
+    cadastrologin() {
+        firebase.auth().createUserWithEmailAndPassword(
+        this.state.email,
+        this.state.senha
+        ).catch((error) => {
+        alert(error.code);
+        })
+        
+        }
 
     render() {
         return (
@@ -52,7 +53,7 @@ export default class TelaCadastro extends React.Component {
                 <TextInput
                     style={styles.inputCadastro}
                     placeholder={"Nome"}
-                    onChangeText={nome => this.setState({ nome })}
+                    onChangeText={(nome) => this.setState({ nome })}
                     value={this.nome}
                 />
 
@@ -91,20 +92,18 @@ export default class TelaCadastro extends React.Component {
                     value={this.contato2} />
 
 
-                <TouchableOpacity style={styles.botao} onPress={() => { this.writeUserData(this.nome, this.email, this.senha, this.contato1, this.contato2); }}>
+                <TouchableOpacity style={styles.botao} onPress={() => { this.cadastrologin(this.nome, this.email, this.senha, this.contato1, this.contato2); }}>
                     <Text style={styles.textoBotao}  >Cadastrar</Text>
                 </TouchableOpacity>
 
             </KeyboardAvoidingView>
 
-             
-
         );
-        
 
-        
+
+
     }
-   
+
 }
 
 
