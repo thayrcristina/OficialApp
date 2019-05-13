@@ -1,21 +1,22 @@
 import React from 'react';
 import firebase from 'firebase';
 
-import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, IDBDatabase } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 
 export default class TelaCadastro extends React.Component {
 
-    writeUserData(userId, nome, email, senha, contato1, contato2) {
-        
-               
-        var userId = "";
-        var nome = "";
-        var email = "";
-        var senha = "";
-        var contato1 = "";
-        var contato2 = "";
+    constructor(props) {
+        super(props);
+        this.nome
+        this.email 
+        this.senha 
+        this.contato1 
+        this.contato2 
+      }
 
-        firebase.database().ref('users/' + userId).push({
+    writeUserData(nome, email, senha, contato1, contato2) {
+                
+        firebase.database().ref('users/').push({
 
             nome,
             email,
@@ -24,7 +25,6 @@ export default class TelaCadastro extends React.Component {
             contato2
 
         }
-
         
         ).catch(
             (erro) => {
@@ -39,8 +39,6 @@ export default class TelaCadastro extends React.Component {
             
         );
 
-
-        
     }
 
     render() {
@@ -83,7 +81,7 @@ export default class TelaCadastro extends React.Component {
                     style={styles.inputContato}
                     placeholder={"Contato 1"}
                     onChangeText={contato1 => this.setState({ contato1 })}
-                    value={this.contato1} />
+                    value={this.contato2} />
 
                 <Text style={styles.textoInput}>Contato 2</Text>
                 <TextInput
@@ -93,7 +91,7 @@ export default class TelaCadastro extends React.Component {
                     value={this.contato2} />
 
 
-                <TouchableOpacity style={styles.botao} onPress={() => { this.writeUserData(); }}>
+                <TouchableOpacity style={styles.botao} onPress={() => { this.writeUserData(this.nome, this.email, this.senha, this.contato1, this.contato2); }}>
                     <Text style={styles.textoBotao}  >Cadastrar</Text>
                 </TouchableOpacity>
 
