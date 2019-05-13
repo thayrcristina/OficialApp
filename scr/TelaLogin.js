@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text, TextInput, TouchableOpacity, StatusBar } from 'react-native';
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, StatusBar } from 'react-native';
 import firebase from 'firebase';
 
 
@@ -11,12 +11,12 @@ export default class TelaLogin extends React.Component {
         senha: '',
         isAuthenticated: false,
     };
-    
+
     login = async () => {
 
         const { email, senha } = this.state;
 
-        
+
         try {
             const user = await firebase.auth().signInWithEmailAndPassword(email, senha);
 
@@ -25,6 +25,7 @@ export default class TelaLogin extends React.Component {
 
         } catch (eerr) {
             console.log(err);
+
         }
         this.props.navigation.navigate("Inicio")
     }
@@ -36,8 +37,8 @@ export default class TelaLogin extends React.Component {
             <View style={styles.container} >
 
 
-                <StatusBar 
-                backgroundColor= "#ef3f67"/>
+                <StatusBar
+                    backgroundColor="#ef3f67" />
 
 
                 <Text style={styles.textoInput}>Digite seu usuário e senha para acessar!</Text>
@@ -57,8 +58,8 @@ export default class TelaLogin extends React.Component {
                     <Text style={styles.textoBotao}>Entrar</Text>
                 </TouchableOpacity>
 
-                
-                  
+
+
 
                 <TouchableOpacity style={styles.cadastro}
                     onPress={() => this.props.navigation.navigate("Cadastro")}>
@@ -66,7 +67,7 @@ export default class TelaLogin extends React.Component {
                 </TouchableOpacity>
 
 
-                {this.state.isAuthenticated ? <Text style={styles.textoLogado} >Logado com sucesso </Text> : null}
+
             </View >
 
         );
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
 
     },
-        
+
     inputAcesso: {
         top: -5,
         width: 250,
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
 
     },
 
-    textoLogado:{
+    textoLogado: {
         top: 10,
         width: 250,
         backgroundColor: "#ef3f67",
