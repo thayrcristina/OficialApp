@@ -3,8 +3,18 @@ import { View, StyleSheet, Text, TextInput, TouchableOpacity, StatusBar } from '
 import firebase from 'firebase';
 
 
+
 export default class TelaLogin extends React.Component {
-    static navigationOptions = { title: "Login" }
+    static navigationOptions = ({ navigation}) =>
+    {
+        let headerTitle = 'Login'; 
+        let headerTitleStyle = { color: 'white' };
+        let headerStyle = { backgroundColor:'#ef3f67'  };
+        
+         return { headerTitle, headerTitleStyle, headerStyle}
+
+    }
+    
 
     state = {
         email: '',

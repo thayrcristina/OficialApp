@@ -5,6 +5,16 @@ import TelaPublicacoes from '../scr/TelaPublicacoes'
 import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, } from 'react-native';
 
 export default class TelaCadastro extends React.Component {
+    static navigationOptions = ({ navigation}) =>
+    {
+        let headerTitle = 'Cadastro'; 
+        let headerTitleStyle = { color: 'white' };
+        let headerStyle = { backgroundColor:'#ef3f67' };
+        //let headerLeft = null; 
+
+         return { headerTitle, headerTitleStyle, headerStyle}
+
+    }
 
     constructor(props) {
         super(props);
@@ -33,7 +43,10 @@ export default class TelaCadastro extends React.Component {
                 });
                 alert("Conta Criada com Sucesso!");
 
-            }           
+                this.props.navigation.navigate("Inicio") 
+
+            }        
+              
 
         });
     }
@@ -44,8 +57,7 @@ export default class TelaCadastro extends React.Component {
             this.state.senha
         ).catch((error) => {
             alert(error.code);
-        },
-            this.props.navigation.navigate("Inicio")
+        }
 
         )
     }

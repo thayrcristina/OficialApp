@@ -4,23 +4,37 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
- 
+  View,
+
   KeyboardAvoidingView
 } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 
 export default class TelaPublicacoes extends React.Component {
- 
+  static navigationOptions = ({ navigation }) => {
+    let headerTitle = 'Publicações';
+    let headerTitleStyle = { color: 'white' };
+    let headerStyle = { backgroundColor: '#df2950' };
+
+
+    return { headerTitle, headerTitleStyle, headerStyle }
+
+  }
+
   render() {
     return (
 
-      
+
 
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+       
+        
+       
+
         <Text style={styles.title}> Postagens </Text>
 
-        <Image style={styles.icon}
+        <Image style={styles.icon1}
           source={require('../assets/icon-publicacao.png')} />
 
         <TextInput
@@ -30,10 +44,10 @@ export default class TelaPublicacoes extends React.Component {
         <TouchableOpacity style={styles.botao}>
           <Text style={styles.textoBotao}>Publicar</Text>
         </TouchableOpacity>
-        </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
 
 
-      
+
 
     );
   };
@@ -44,6 +58,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5F5F5',
   },
+
+  
+  icon: {
+    width: 45,
+    height: 45,
+
+  },
   title: {
     padding: 10,
     marginBottom: 20,
@@ -53,7 +74,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch'
   },
 
-  icon: {
+  icon1: {
     width: 50,
     height: 50,
     right: -55,
