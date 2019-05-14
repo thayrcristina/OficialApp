@@ -30,17 +30,13 @@ firebase.initializeApp(firebaseConfig);
 
 const AppNavigator = createStackNavigator({
 
-  //Login: {screen:TelaLogin},
-  //Cadastro: {screen:TelaCadastro},
+  Login: {screen:TelaLogin},
+  Cadastro: {screen:TelaCadastro},
   Inicio: {screen: TelaInicial},
   Publicacoes: {screen: TelaPublicacoes},
   Ong: {screen: TelaOng}
 
+  });
   
-});
-
-
-
-
 export default createAppContainer(AppNavigator);
 
