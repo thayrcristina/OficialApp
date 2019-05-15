@@ -1,13 +1,14 @@
 import React  from 'react';
 import firebase from 'firebase';
-import StatusBar from 'react-native'
-import {createBottomTabNavigator, createStackNavigator, createAppContainer} from 'react-navigation';
+
+import {createBottomTabNavigator, createStackNavigator, createAppContainer, createSwitchNavigator} from 'react-navigation';
 
 import TelaLogin from './scr/TelaLogin';
 import TelaCadastro from './scr/TelaCadastro'; 
 import TelaPublicacoes from './scr/TelaPublicacoes';
 import TelaInicial from './scr/TelaInicial,'; 
 import TelaOng from './scr/TelaOng';
+
 
 {
   var firebaseConfig = {
@@ -23,20 +24,17 @@ import TelaOng from './scr/TelaOng';
 firebase.initializeApp(firebaseConfig);
 };
 
-<StatusBar barStyle="ligth-content" backgroundColor="#fff"/>
-
-
-
-
 const AppNavigator = createStackNavigator({
 
-  Login: {screen:TelaLogin},
-  Cadastro: {screen:TelaCadastro},
+  //Login: {screen:TelaLogin},
+  //Cadastro: {screen:TelaCadastro},
   Inicio: {screen: TelaInicial},
   Publicacoes: {screen: TelaPublicacoes},
   Ong: {screen: TelaOng}
 
   });
+
+ 
   
 export default createAppContainer(AppNavigator);
 

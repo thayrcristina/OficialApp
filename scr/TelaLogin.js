@@ -1,20 +1,22 @@
 import React from 'react';
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, StatusBar } from 'react-native';
+import {
+    View,
+    StyleSheet,
+    Text, TextInput,
+    TouchableOpacity,
+    Image
+} from 'react-native';
 import firebase from 'firebase';
 
 
-
 export default class TelaLogin extends React.Component {
-    static navigationOptions = ({ navigation}) =>
-    {
-        let headerTitle = 'Login'; 
+    static navigationOptions = ({ }) => {
+        let headerTitle = 'Login';
         let headerTitleStyle = { color: 'white' };
-        let headerStyle = { backgroundColor:'#ef3f67'  };
-        
-         return { headerTitle, headerTitleStyle, headerStyle}
+        let headerStyle = { backgroundColor: '#ef3f67' };
 
+        return { headerTitle, headerTitleStyle, headerStyle }
     }
-    
 
     state = {
         email: '',
@@ -23,33 +25,26 @@ export default class TelaLogin extends React.Component {
     };
 
     login = async () => {
-
         const { email, senha } = this.state;
 
 
         try {
             const user = await firebase.auth().signInWithEmailAndPassword(email, senha);
-
             this.setState({ isAuthenticated: true });
             console.log(user);
-
         } catch (eerr) {
             console.log(err);
-
         }
         this.props.navigation.navigate("Inicio")
     }
 
     render() {
-
         return (
 
             <View style={styles.container} >
 
-
-                <StatusBar
-                    backgroundColor="#ef3f67" />
-
+                <Image style={styles.logo}
+                    source={require('../assets/logo.png')} />
 
                 <Text style={styles.textoInput}>Digite seu usuário e senha para acessar!</Text>
                 <TextInput
@@ -63,20 +58,14 @@ export default class TelaLogin extends React.Component {
                     value={this.state.senha}
                     onChangeText={senha => this.setState({ senha })} />
 
-
                 <TouchableOpacity style={styles.botao} onPress={this.login}>
                     <Text style={styles.textoBotao}>Entrar</Text>
                 </TouchableOpacity>
-
-
-
 
                 <TouchableOpacity style={styles.cadastro}
                     onPress={() => this.props.navigation.navigate("Cadastro")}>
                     <Text style={styles.textoCadastro}>Não tem conta? Cadastre-se aqui!</Text>
                 </TouchableOpacity>
-
-
 
             </View >
 
@@ -85,19 +74,12 @@ export default class TelaLogin extends React.Component {
 }
 
 const styles = StyleSheet.create({
+
     container: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center'
-
-    },
-
-    navigationOptions: {
-        backgroundColor: "#ef3f67",
-        fontSize: 20,
-        fontWeight: 'bold',
-
     },
 
     inputAcesso: {
@@ -114,22 +96,15 @@ const styles = StyleSheet.create({
         width: 250,
         backgroundColor: "#ef3f67",
         borderWidth: 1,
-        borderRadius: 2
-
+        borderRadius: 8
     },
-
-    textoLogado: {
-        top: 10,
-        width: 250,
-        backgroundColor: "#ef3f67",
-    },
-
 
     cadastro: {
         top: 15,
         width: 250,
 
     },
+
     textoBotao: {
         color: 'white',
         fontSize: 20,
@@ -153,13 +128,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         alignSelf: 'center',
     },
+
     textoInput: {
         top: -10,
         fontSize: 15,
         color: 'black',
         fontWeight: 'bold',
         alignSelf: 'center',
-
     },
 
     textoFacebook: {

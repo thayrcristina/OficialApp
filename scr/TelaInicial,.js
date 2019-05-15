@@ -1,9 +1,6 @@
 import React from 'react';
-
-
 import {
     View,
-    Text,
     TouchableOpacity,
     StyleSheet,
     Image
@@ -12,7 +9,7 @@ import {
 import { Button } from 'react-native-elements';
 
 export default class TelaInicial extends React.Component {
-    static navigationOptions = ({ navigation }) => {
+    static navigationOptions = ({ }) => {
         let headerTitle = 'Inicio';
         let headerTitleStyle = { color: 'white' };
         let headerStyle = { backgroundColor: '#df2950' };
@@ -28,14 +25,20 @@ export default class TelaInicial extends React.Component {
 
             <View style={styles.conteiner}>
 
+                <TouchableOpacity >
+                    <Image style={styles.logo}
+                        source={require('../assets/logo.png')} />
+                </TouchableOpacity>
+
 
                 <View style={styles.menu} >
 
-                <TouchableOpacity
+                    <TouchableOpacity
                         onPress={() => this.props.navigation.navigate("Inicio")}>
                         <Image style={styles.icon}
                             source={require('../assets/home.png')} />
                     </TouchableOpacity>
+
 
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate("Publicacoes")}>
@@ -50,7 +53,7 @@ export default class TelaInicial extends React.Component {
                             source={require('../assets/ongs.png')} />
                     </TouchableOpacity>
 
-                    
+
                 </View>
 
 
@@ -62,35 +65,37 @@ export default class TelaInicial extends React.Component {
 }
 const styles = StyleSheet.create({
     container: {
-        
+
         flex: 1,
         backgroundColor: '#fff',
-        
-        
-
-
+        alignItems: 'center',
+        justifyContent: 'center'
 
     },
-    menu: {    
-        
+
+    menu: {
         borderColor: '#a5a4a4',
         borderWidth: 2,
-        flexDirection: 'row',       
+        flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: '#fff',
-        alignItems: 'flex-end'
-        //top: 510,
-        
-        
+        alignItems: 'flex-end',
+        top: 340,
+
+
     },
 
     icon: {
         width: 45,
         height: 45,
-        
-
-
-
     },
-    
+
+
+    logo: {
+        margin: 20,
+        width: 130,
+        height: 130,
+        alignSelf: 'auto',
+
+   },
 });

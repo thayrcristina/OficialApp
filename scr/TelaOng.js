@@ -15,14 +15,14 @@ import { TextInput } from 'react-native-gesture-handler';
 import { } from 'react-navigation';
 
 export default class TelaOng extends React.Component {
-    static navigationOptions = ({ navigation }) => {
+    static navigationOptions = ({}) => {
         let headerTitle = 'Ongs';
         let headerTitleStyle = { color: 'white' };
         let headerStyle = { backgroundColor: '#df2950' };
-        
 
 
-        return { headerTitle, headerTitleStyle, headerStyle}
+
+        return { headerTitle, headerTitleStyle, headerStyle }
 
     }
 
@@ -31,7 +31,6 @@ export default class TelaOng extends React.Component {
 
             <ScrollView style={styles.container}>
             
-           
 
                 <View style={styles.containerCard}>
                     <Image source={require('../assets/ong-1.jpg')} style={styles.image} />
@@ -69,9 +68,11 @@ export default class TelaOng extends React.Component {
                     </TouchableOpacity>
                 </View>
 
-              
+                
 
             </ScrollView>
+
+
 
         );
 
@@ -86,8 +87,10 @@ const styles = StyleSheet.create({
         paddingVertical: 10
     },
 
+
+
     containerCard: {
-        top: 150,
+        top: 10,
         width: 170,
         height: 300,
         backgroundColor: '#e5e5e5',
@@ -98,7 +101,7 @@ const styles = StyleSheet.create({
     },
 
     containerCard2: {
-        top: -150,
+        top: -290,
         width: 170,
         height: 300,
         backgroundColor: '#e5e5e5',
@@ -109,7 +112,7 @@ const styles = StyleSheet.create({
     },
 
     containerCard3: {
-        top:  -125,
+        top: -250,
         width: 170,
         height: 300,
         backgroundColor: '#e5e5e5',
@@ -120,7 +123,7 @@ const styles = StyleSheet.create({
     },
 
     containerCard4: {
-        top: -425,
+        top: -550,
         width: 170,
         height: 300,
         backgroundColor: '#e5e5e5',
@@ -160,8 +163,8 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold',
     },
-    
- textDesc: {
-  top: -25
- }
+
+    textDesc: {
+        top: -25
+    }
 });

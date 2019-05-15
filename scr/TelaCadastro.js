@@ -5,15 +5,13 @@ import TelaPublicacoes from '../scr/TelaPublicacoes'
 import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, } from 'react-native';
 
 export default class TelaCadastro extends React.Component {
-    static navigationOptions = ({ navigation}) =>
-    {
-        let headerTitle = 'Cadastro'; 
+    static navigationOptions = ({ }) => {
+        let headerTitle = 'Cadastro';
         let headerTitleStyle = { color: 'white' };
-        let headerStyle = { backgroundColor:'#ef3f67' };
+        let headerStyle = { backgroundColor: '#ef3f67' };
         //let headerLeft = null; 
 
-         return { headerTitle, headerTitleStyle, headerStyle}
-
+        return { headerTitle, headerTitleStyle, headerStyle }
     }
 
     constructor(props) {
@@ -24,17 +22,14 @@ export default class TelaCadastro extends React.Component {
             senha: '',
             contato1: '',
             contato2: '',
-
         };
 
         this.cadastrologin = this.cadastrologin.bind(this);
         firebase.auth().signOut();
 
-
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 firebase.database().ref('Usuarios').child(user.uid).set({
-
                     email: this.state.email,
                     senha: this.state.senha,
                     nome: this.state.nome,
@@ -43,14 +38,10 @@ export default class TelaCadastro extends React.Component {
                 });
                 alert("Conta Criada com Sucesso!");
 
-                this.props.navigation.navigate("Inicio") 
-
-            }        
-              
-
+                this.props.navigation.navigate("Inicio")
+            }
         });
     }
-
     cadastrologin() {
         firebase.auth().createUserWithEmailAndPassword(
             this.state.email,
@@ -111,29 +102,21 @@ export default class TelaCadastro extends React.Component {
                     onChangeText={contato2 => this.setState({ contato2 })}
                     value={this.contato2} />
 
-
-                <TouchableOpacity style={styles.botao} onPress={() => { this.cadastrologin(this.nome, this.email, this.senha, this.contato1, this.contato2); }}>
+                <TouchableOpacity style={styles.botao}
+                    onPress={() => { this.cadastrologin(this.nome, this.email, this.senha, this.contato1, this.contato2); }}>
                     <Text style={styles.textoBotao}>Cadastrar</Text>
                 </TouchableOpacity>
 
             </KeyboardAvoidingView>
-
         );
-
-
-
     }
-
 }
-
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center'
-
     },
 
     tituloCad: {
@@ -144,8 +127,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         alignSelf: 'flex-start',
     },
-
-
+    
     tituloInformacoes: {
         padding: 10,
         top: 5,
@@ -153,8 +135,8 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold',
         alignSelf: 'flex-start',
-
     },
+
     textoObs: {
         fontSize: 10,
         color: 'black',
