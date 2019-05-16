@@ -2,17 +2,20 @@ import React from 'react';
 import firebase from 'firebase';
 import {
   Image,
+  View,
   StyleSheet,
   Text,
-  TouchableOpacity,
-  KeyboardAvoidingView
+  TouchableOpacity
+
 } from 'react-native';
-import { TextInput, FlatList } from 'react-native-gesture-handler';
-
-
-
+import { TextInput } from 'react-native-gesture-handler';
+import PropTypes from 'prop-types';
 
 export default class TelaPublicacoes extends React.Component {
+
+  static propTypes = {
+    publicacao: PropTypes.array.isRequired
+  };
 
   static navigationOptions = ({ }) => {
     let headerTitle = 'Publicações';
@@ -22,64 +25,73 @@ export default class TelaPublicacoes extends React.Component {
     return { headerTitle, headerTitleStyle, headerStyle }
   }
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-        publicacao: '', 
-    };
+      publicacao: '',
+    }
+  };
+
+
+  Publicacoes() {
+    firebase.database().ref('Publicacoes').push({
+      publicacao: this.state.publicacao,
+    });
+    alert("Publicação realizada com sucesso!");
   }
 
-    Publicacoes() {
-      firebase.database().ref('Publicacoes').set({
-         publicacao: this.state.publicacao, 
-      });
-      alert("Publicação reallizada com sucesso!");
-    }
-  
-    listarPub() {
-      fireabase.database().ref('Publicacoes').on('value', (snapshot) => {
-        this.setState({ publicacoes: snapshot.val() }); 
-        
-            }); 
-          }
-           componentDidMount(){
-             this.listarPub();
 
-           }
-    
+  componentDidMount() {
+    firebase.database().ref('Publicacoes').on('value', (snapshot) => {
+      publicacao = snapshot.val();
+      this.setState({ publicacao : publicacao });
 
-    
-
+    });
+  }
   render() {
+
     return (
 
-      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+      <View style={styles.container} >
 
-        <Text style={styles.title}> Postagens </Text>
+        <TouchableOpacity style={styles.title}
+          onPress={() => this.props.navigation.navigate("Publicacao")}>
+          <Text style={styles.title}>Postagens</Text>
+        </TouchableOpacity>
 
-      <FlatList style={styles.listaPub}>
-        {Object.keys(this.state.publicacoes).map(publicacaoId => {this.state.publicacoes[publicacaoId]})}    
-      
-      
-      
-      </FlatList>
-       
+
+        <View style={styles.publicadas}>
+
+
+          {
+
+            Object.keys(this.state.publicacao1)
+              ? Object.keys(this.state.publicacao1).map(data, publicacaoId => (
+                <Text key={publicacaoId}>
+                  {this.state.publicacao1[data]}
+                </Text>
+              ))
+              : <Text> Não há publicações! </Text>
+          }
+
+
+        </View>
 
         <Image style={styles.icon1}
           source={require('../assets/icon-publicacao.png')} />
 
-       
+
         <TextInput
           style={styles.inputPublicacao}
           placeholder={"Escreva sua publicação..."}
           onChangeText={(publicacao) => this.setState({ publicacao })}
           value={this.publicacao} />
 
-        <TouchableOpacity style={styles.botao} 
-        onPress={() => { this.Publicacoes(this.publicacao);}}>
+        <TouchableOpacity style={styles.botao}
+          onPress={() => { this.Publicacoes(this.publicacao); }}>
           <Text style={styles.textoBotao}>Publicar</Text>
         </TouchableOpacity>
-      </KeyboardAvoidingView >
+      </View>
 
     );
   };
@@ -95,8 +107,11 @@ const styles = StyleSheet.create({
     width: 45,
     height: 45,
   },
+  publicadas: {
+    backgroundColor: '#F5F5F5',
+    top: 150,
+  },
 
-  
   title: {
     padding: 10,
     marginBottom: 20,

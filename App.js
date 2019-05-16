@@ -24,6 +24,8 @@ import TelaOng from './scr/TelaOng';
 firebase.initializeApp(firebaseConfig);
 };
 
+
+
 const AppNavigator = createStackNavigator({
 
   //Login: {screen:TelaLogin},
@@ -35,6 +37,6 @@ const AppNavigator = createStackNavigator({
   });
 
  
-  
+
 export default createAppContainer(AppNavigator);
 
