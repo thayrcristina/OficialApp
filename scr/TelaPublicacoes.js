@@ -28,10 +28,9 @@ export default class TelaPublicacoes extends React.Component {
   constructor() {
     super();
     this.state = {
-      publicacao: '',
+      publicacao: [],
     }
   };
-
 
   Publicacoes() {
     firebase.database().ref('Publicacoes').push({
@@ -40,57 +39,62 @@ export default class TelaPublicacoes extends React.Component {
     alert("Publicação realizada com sucesso!");
   }
 
+  // componentDidMount() {
+  //   firebase.database().ref('Publicacoes').once('value').then((snapshot) => {
+  //     const publicacaoId = [];
+    
+  //     snapshot.forEach((childSnapshot) => {
+  //       publicacaoId.push({
+  //         id: childSnapshot.key,
+  //         ...childSnapshot.val()
+  //       });
+  //     });
+  //     });
+  //   } 
 
-  componentDidMount() {
-    firebase.database().ref('Publicacoes').on('value', (snapshot) => {
-      publicacao = snapshot.val();
-      this.setState({ publicacao : publicacao });
-
-    });
-  }
+      // this.setState({ publicacao });
+      //    });
+  
   render() {
 
-    return (
+        return(
 
-      <View style={styles.container} >
+      <View style = { styles.container } >
 
-        <TouchableOpacity style={styles.title}
-          onPress={() => this.props.navigation.navigate("Publicacao")}>
-          <Text style={styles.title}>Postagens</Text>
-        </TouchableOpacity>
-
-
-        <View style={styles.publicadas}>
+            <TouchableOpacity style={styles.title}
+              onPress={() => this.props.navigation.navigate("Publicacao")}>
+              <Text style={styles.title}>Postagens</Text>
+            </TouchableOpacity>
 
 
-          {
+            <View style={styles.publicadas}>
 
-            Object.keys(this.state.publicacao)
-              ? Object.keys(this.state.publicacao).map(publicacaoId => (
-                <Text key={publicacaoId}>
-                  {this.state.publicacao[publicacaoId]}
-                </Text>
-              ))
-              : <Text> Não há publicações! </Text>
-          }
+              {/* {
 
+                Object.keys(this.state.publicacaoId).length > 0
+                  ? Object.keys(this.state.publicacaoId).map(publicacaoId => (
+                    <Text key={publicacaoId}>
+                      {this.state.publicacaoId[publicacaoId]}
+                    </Text>
+                  ))
+                  : <Text> Não há publicações! </Text>
+              } */}
 
-        </View>
+            </View>
 
-        <Image style={styles.icon1}
-          source={require('../assets/icon-publicacao.png')} />
+            <Image style={styles.icon1}
+              source={require('../assets/icon-publicacao.png')} />
 
+            <TextInput
+              style={styles.inputPublicacao}
+              placeholder={"Escreva sua publicação..."}
+              onChangeText={(publicacao) => this.setState({ publicacao })}
+              value={this.publicacao} />
 
-        <TextInput
-          style={styles.inputPublicacao}
-          placeholder={"Escreva sua publicação..."}
-          onChangeText={(publicacao) => this.setState({ publicacao })}
-          value={this.publicacao} />
-
-        <TouchableOpacity style={styles.botao}
-          onPress={() => { this.Publicacoes(this.publicacao); }}>
-          <Text style={styles.textoBotao}>Publicar</Text>
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.botao}
+              onPress={() => { this.Publicacoes(this.publicacao); }}>
+              <Text style={styles.textoBotao}>Publicar</Text>
+            </TouchableOpacity>
       </View>
 
     );

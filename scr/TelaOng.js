@@ -19,10 +19,11 @@ export default class TelaOng extends React.Component {
         let headerTitle = 'Ongs';
         let headerTitleStyle = { color: 'white' };
         let headerStyle = { backgroundColor: '#df2950' };
+        
 
 
 
-        return { headerTitle, headerTitleStyle, headerStyle }
+        return { headerTitle, headerTitleStyle, headerStyle}
 
     }
 
