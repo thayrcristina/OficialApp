@@ -65,10 +65,10 @@ export default class TelaPublicacoes extends React.Component {
 
           {
 
-            Object.keys(this.state.publicacao1)
-              ? Object.keys(this.state.publicacao1).map(data, publicacaoId => (
+            Object.keys(this.state.publicacao)
+              ? Object.keys(this.state.publicacao).map(publicacaoId => (
                 <Text key={publicacaoId}>
-                  {this.state.publicacao1[data]}
+                  {this.state.publicacao[publicacaoId]}
                 </Text>
               ))
               : <Text> Não há publicações! </Text>
