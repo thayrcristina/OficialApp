@@ -5,7 +5,8 @@ import {
   View,
   StyleSheet,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  FlatList
 
 } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
@@ -21,9 +22,9 @@ export default class TelaPublicacoes extends React.Component {
     super(props);
     this.state = {
       publicacao: [],
-     
+
     };
-  } 
+  }
 
   static navigationOptions = ({ }) => {
     let headerTitle = 'Publicações';
@@ -39,31 +40,72 @@ export default class TelaPublicacoes extends React.Component {
       publicacao: this.state.publicacao,
     });
     alert("Publicação realizada com sucesso!");
-  };  
+  }
+
+  listarPub() {
+    firebase.database().ref('Publicacoes').on('value', (snap) => {
+      var pubs = [];
+      snap.forEach((child) => {
+        pubs.push({
+          id: child.key,
+          descricao: child.val().descricao,
+          date: child.val().date,
+        });
+
+      });
+
+      this.setState({ publicacoes: pubs });
+
+    });
 
 
-  componentDidMount() {
-   firebase.database().ref('Publicacoes').once('value').then((snapshot) => {
-   const publicacao = snapshot.val();  
-  this.setState({ pub: publicacao });
- });
+  }
 
-}  
+  keyExtractor = (item, index) => item.id;
+
+  renderItem = ({ item }) =>
+    <View>
+
+      <Text> {item.descricao}, {item.data} </Text>
+
+    </View>
+
+  //   componentDidMount() {
+  //    firebase.database().ref('Publicacoes').once('value').then((snapshot) => {
+  //    const publicacao = snapshot.val();  
+  //   this.setState({ pub: publicacao });
+  //  });
+
+
   render() {
 
-        return(
 
-      <View style = { styles.container } >
+    return (
 
-            <TouchableOpacity style={styles.title}
-              onPress={() => this.props.navigation.navigate("Publicacao")}>
-              <Text style={styles.title}>Postagens</Text>
-            </TouchableOpacity>
+      <View style={styles.container} >
+
+        <TouchableOpacity style={styles.title}
+          onPress={() => this.props.navigation.navigate("Publicacao")}>
+          <Text style={styles.title}>Postagens</Text>
+        </TouchableOpacity>
 
 
-            <View style={styles.publicadas}>
+      <View style={styles.publicadas}>
+        <FlatList styles={{backgroundColor: '#ccc'}}
+          date={this.state.publicacoes}
+          keyExtractor={this.keyExtractor}
+          renderItem={this.renderItem}
+      />
+        </View>
 
-              {
+        {/* <FlatList
+            data={this.state.todos}
+            keyExtractor={this.keyExtractor}
+            renderItem={this.renderItem}
+          /> */}
+
+
+        {/* {
 
                 Object.keys(this.state.publicacao).length > 0
                   ? Object.keys(this.state.publicacao).map(pub => (
@@ -72,23 +114,22 @@ export default class TelaPublicacoes extends React.Component {
                     </Text>
                   ))
                   : <Text> Não há publicações! </Text>
-              } 
+              }  */}
 
-            </View>
 
-            <Image style={styles.icon1}
-              source={require('../assets/icon-publicacao.png')} />
+        <Image style={styles.icon1}
+          source={require('../assets/icon-publicacao.png')} />
 
-            <TextInput
-              style={styles.inputPublicacao}
-              placeholder={"Escreva sua publicação..."}
-              onChangeText={(publicacao) => this.setState({ publicacao })}
-              value={this.publicacao} />
+        <TextInput
+          style={styles.inputPublicacao}
+          placeholder={"Escreva sua publicação..."}
+          onChangeText={(publicacao) => this.setState({ publicacao })}
+          value={this.publicacao} />
 
-            <TouchableOpacity style={styles.botao}
-              onPress={() => { this.Publicacoes(this.publicacao); }}>
-              <Text style={styles.textoBotao}>Publicar</Text>
-            </TouchableOpacity>
+        <TouchableOpacity style={styles.botao}
+          onPress={() => { this.Publicacoes(this.publicacao); }}>
+          <Text style={styles.textoBotao}>Publicar</Text>
+        </TouchableOpacity>
       </View>
 
     );
