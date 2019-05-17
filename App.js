@@ -1,14 +1,13 @@
 import React  from 'react';
 import firebase from 'firebase';
 
-import {createBottomTabNavigator, createStackNavigator, createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator, createAppContainer} from 'react-navigation';
 
 import TelaLogin from './scr/TelaLogin';
 import TelaCadastro from './scr/TelaCadastro'; 
 import TelaPublicacoes from './scr/TelaPublicacoes';
 import TelaInicial from './scr/TelaInicial,'; 
 import TelaOng from './scr/TelaOng';
-
 
 {
   var firebaseConfig = {
@@ -24,8 +23,6 @@ import TelaOng from './scr/TelaOng';
 firebase.initializeApp(firebaseConfig);
 };
 
-
-
 const AppNavigator = createStackNavigator({
 
   //Login: {screen:TelaLogin},
@@ -35,8 +32,6 @@ const AppNavigator = createStackNavigator({
   Ong: {screen: TelaOng}
 
   });
-
- 
 
 export default createAppContainer(AppNavigator);
 

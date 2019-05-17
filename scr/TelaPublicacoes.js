@@ -14,8 +14,16 @@ import PropTypes from 'prop-types';
 export default class TelaPublicacoes extends React.Component {
 
   static propTypes = {
-    publicacao: PropTypes.array.isRequired
+    publicacao: PropTypes.array
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      publicacao: [],
+     
+    };
+  } 
 
   static navigationOptions = ({ }) => {
     let headerTitle = 'Publicações';
@@ -25,36 +33,22 @@ export default class TelaPublicacoes extends React.Component {
     return { headerTitle, headerTitleStyle, headerStyle }
   }
 
-  constructor() {
-    super();
-    this.state = {
-      publicacao: [],
-    }
-  };
 
   Publicacoes() {
     firebase.database().ref('Publicacoes').push({
       publicacao: this.state.publicacao,
     });
     alert("Publicação realizada com sucesso!");
-  }
+  };  
 
-  // componentDidMount() {
-  //   firebase.database().ref('Publicacoes').once('value').then((snapshot) => {
-  //     const publicacaoId = [];
-    
-  //     snapshot.forEach((childSnapshot) => {
-  //       publicacaoId.push({
-  //         id: childSnapshot.key,
-  //         ...childSnapshot.val()
-  //       });
-  //     });
-  //     });
-  //   } 
 
-      // this.setState({ publicacao });
-      //    });
-  
+  componentDidMount() {
+   firebase.database().ref('Publicacoes').once('value').then((snapshot) => {
+   const publicacao = snapshot.val();  
+  this.setState({ pub: publicacao });
+ });
+
+}  
   render() {
 
         return(
@@ -69,16 +63,16 @@ export default class TelaPublicacoes extends React.Component {
 
             <View style={styles.publicadas}>
 
-              {/* {
+              {
 
-                Object.keys(this.state.publicacaoId).length > 0
-                  ? Object.keys(this.state.publicacaoId).map(publicacaoId => (
-                    <Text key={publicacaoId}>
-                      {this.state.publicacaoId[publicacaoId]}
+                Object.keys(this.state.publicacao).length > 0
+                  ? Object.keys(this.state.publicacao).map(pub => (
+                    <Text key={pub}>
+                      {this.state.publicacao[pub]}
                     </Text>
                   ))
                   : <Text> Não há publicações! </Text>
-              } */}
+              } 
 
             </View>
 

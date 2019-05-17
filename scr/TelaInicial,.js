@@ -17,9 +17,7 @@ export default class TelaInicial extends React.Component {
         let headerStyle = { backgroundColor: '#df2950' };
         let headerLeft = null;
 
-
         return { headerTitle, headerTitleStyle, headerStyle, headerLeft }
-
     }
 
     render() {
@@ -120,12 +118,7 @@ export default class TelaInicial extends React.Component {
                     
                     </View>
                                                        
-                    </View>
-                    
-                    
-                    
-           
-
+                    </View>                                                        
         );
     };
 }

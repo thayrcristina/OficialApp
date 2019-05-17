@@ -15,23 +15,18 @@ import { TextInput } from 'react-native-gesture-handler';
 import { } from 'react-navigation';
 
 export default class TelaOng extends React.Component {
-    static navigationOptions = ({}) => {
+    static navigationOptions = ({ }) => {
         let headerTitle = 'Ongs';
         let headerTitleStyle = { color: 'white' };
         let headerStyle = { backgroundColor: '#df2950' };
-        
 
-
-
-        return { headerTitle, headerTitleStyle, headerStyle}
-
+        return { headerTitle, headerTitleStyle, headerStyle }
     }
 
     render() {
         return (
 
             <ScrollView style={styles.container}>
-            
 
                 <View style={styles.containerCard}>
                     <Image source={require('../assets/ong-1.jpg')} style={styles.image} />
@@ -69,26 +64,16 @@ export default class TelaOng extends React.Component {
                     </TouchableOpacity>
                 </View>
 
-                
-
             </ScrollView>
-
-
-
-        );
-
-
-
-
+            
+            );
+        }
     }
-}
 
 const styles = StyleSheet.create({
     container: {
         paddingVertical: 10
     },
-
-
 
     containerCard: {
         top: 10,
