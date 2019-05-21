@@ -14,14 +14,13 @@ import PropTypes from 'prop-types';
 
 export default class TelaPublicacoes extends React.Component {
 
-  static propTypes = {
-    publicacao: PropTypes.array
-  };
 
-  constructor(props) {
-    super(props);
+
+  constructor() {
+    super();
     this.state = {
       publicacao: [],
+      publicadas: null
 
     };
   }
@@ -34,50 +33,34 @@ export default class TelaPublicacoes extends React.Component {
     return { headerTitle, headerTitleStyle, headerStyle }
   }
 
-
   Publicacoes() {
     firebase.database().ref('Publicacoes').push({
       publicacao: this.state.publicacao,
     });
     alert("Publicação realizada com sucesso!");
+  };
+
+  // listarPub(){
+  //   const publicadas = fireabase.database().ref('Publicacoes');
+  //   publicadas.on('value', (snapshot) => {
+  //     this.setState({publicadas: snapshot.val()});   
+  //       });
+  // }
+  //  render() {
+
+  componentDidMount() {
+    if (!this.state.publicadas) {
+      const publicadas = firebase.database().ref('Publicacoes').child('publicacao');
+      publicadas.on('value', (snapshot) => {
+        this.setState({ publicadas: snapshot.val() });
+       })
+      console.log(publicadas.on('value', (snapshot) => {
+        this.setState({ publicadas: snapshot.val() });
+       })); 
+    }
   }
-
-  listarPub() {
-    firebase.database().ref('Publicacoes').on('value', (snap) => {
-      var pubs = [];
-      snap.forEach((child) => {
-        pubs.push({
-          id: child.key,
-          descricao: child.val().descricao,
-          date: child.val().date,
-        });
-
-      });
-
-      this.setState({ publicacoes: pubs });
-
-    });
-
-
-  }
-
-  keyExtractor = (item, index) => item.id;
-
-  renderItem = ({ item }) =>
-    <View>
-
-      <Text> {item.descricao}, {item.data} </Text>
-
-    </View>
-
-  //   componentDidMount() {
-  //    firebase.database().ref('Publicacoes').once('value').then((snapshot) => {
-  //    const publicacao = snapshot.val();  
-  //   this.setState({ pub: publicacao });
-  //  });
-
-
   render() {
+    const { publicadas } = this.state
 
 
     return (
@@ -90,23 +73,15 @@ export default class TelaPublicacoes extends React.Component {
         </TouchableOpacity>
 
 
-      <View style={styles.publicadas}>
-        <FlatList styles={{backgroundColor: '#ccc'}}
-          date={this.state.publicacoes}
-          keyExtractor={this.keyExtractor}
-          renderItem={this.renderItem}
-      />
-        </View>
-
-        {/* <FlatList
-            data={this.state.todos}
-            keyExtractor={this.keyExtractor}
-            renderItem={this.renderItem}
-          /> */}
-
+        <View style={styles.publicadas}>
+          {
+            
+              publicadas &&
+            <Text>{publicadas.publicacao}</Text> //AQUI VAI CORRESPONDER AO VALOR DA PROPRIEDADE DO OBJETO QUE VOCE DESEJA MOSTRAR
+          } 
+        </View >
 
         {/* {
-
                 Object.keys(this.state.publicacao).length > 0
                   ? Object.keys(this.state.publicacao).map(pub => (
                     <Text key={pub}>
@@ -147,7 +122,7 @@ const styles = StyleSheet.create({
     height: 45,
   },
   publicadas: {
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#ccc',
     top: 150,
   },
 
