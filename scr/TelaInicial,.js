@@ -14,7 +14,7 @@ export default class TelaInicial extends React.Component {
     static navigationOptions = ({ }) => {
         let headerTitle = 'Inicio';
         let headerTitleStyle = { color: 'white' };
-        let headerStyle = { backgroundColor: '#df2950' };
+        let headerStyle = { backgroundColor: '#ef3f67' };
         let headerLeft = null;
 
         return { headerTitle, headerTitleStyle, headerStyle, headerLeft }
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
 
     menuContent: {
         // position: 'relative',
-        borderColor: '#a5a4a4',
+        borderColor: '#d1d1d1',
         borderWidth: 2,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         alignContent: 'flex-end',
         flexWrap: 'nowrap',
-        top: -1,
+        
     },
 
     tituloAstro: {

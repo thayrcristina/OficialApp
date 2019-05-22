@@ -6,15 +6,14 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  FlatList
+  KeyboardAvoidingView
+
 
 } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import PropTypes from 'prop-types';
 
 export default class TelaPublicacoes extends React.Component {
-
-
 
   constructor() {
     super();
@@ -28,7 +27,7 @@ export default class TelaPublicacoes extends React.Component {
   static navigationOptions = ({ }) => {
     let headerTitle = 'Publicações';
     let headerTitleStyle = { color: 'white' };
-    let headerStyle = { backgroundColor: '#df2950' };
+    let headerStyle = { backgroundColor: '#ef3f67' };
 
     return { headerTitle, headerTitleStyle, headerStyle }
   }
@@ -53,10 +52,10 @@ export default class TelaPublicacoes extends React.Component {
       const publicadas = firebase.database().ref('Publicacoes').child('publicacao');
       publicadas.on('value', (snapshot) => {
         this.setState({ publicadas: snapshot.val() });
-       })
+      })
       console.log(publicadas.on('value', (snapshot) => {
         this.setState({ publicadas: snapshot.val() });
-       })); 
+      }));
     }
   }
   render() {
@@ -75,10 +74,10 @@ export default class TelaPublicacoes extends React.Component {
 
         <View style={styles.publicadas}>
           {
-            
-              publicadas &&
+
+            publicadas &&
             <Text>{publicadas.publicacao}</Text> //AQUI VAI CORRESPONDER AO VALOR DA PROPRIEDADE DO OBJETO QUE VOCE DESEJA MOSTRAR
-          } 
+          }
         </View >
 
         {/* {
@@ -92,20 +91,31 @@ export default class TelaPublicacoes extends React.Component {
               }  */}
 
 
-        <Image style={styles.icon1}
-          source={require('../assets/icon-publicacao.png')} />
 
-        <TextInput
-          style={styles.inputPublicacao}
-          placeholder={"Escreva sua publicação..."}
-          onChangeText={(publicacao) => this.setState({ publicacao })}
-          value={this.publicacao} />
 
-        <TouchableOpacity style={styles.botao}
-          onPress={() => { this.Publicacoes(this.publicacao); }}>
-          <Text style={styles.textoBotao}>Publicar</Text>
-        </TouchableOpacity>
-      </View>
+
+        <KeyboardAvoidingView style={styles.publicacoes} behavior="padding" >
+
+
+          <Image style={styles.icon1}
+            source={require('../assets/icon-publicacao.png')} />
+
+          <TextInput
+
+            style={styles.inputPublicacao}
+            placeholder={"Escreva sua publicação..."}
+            onChangeText={(publicacao) => this.setState({ publicacao })}
+            value={this.publicacao} />
+
+          <TouchableOpacity style={styles.botao}
+            onPress={() => { this.Publicacoes(this.publicacao); }}>
+            <Text style={styles.textoBotao}>Publicar</Text>
+          </TouchableOpacity>
+          <View style={{ height: 40 }} />
+          </KeyboardAvoidingView>
+        </View>
+
+
 
     );
   };
@@ -115,6 +125,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5F5F5',
+    justifyContent: 'space-between',
   },
 
   icon: {
@@ -122,8 +133,16 @@ const styles = StyleSheet.create({
     height: 45,
   },
   publicadas: {
-    backgroundColor: '#ccc',
-    top: 150,
+    backgroundColor: '#ef3f67',
+    // top: 150,
+  },
+
+  publicacoes: {
+    padding: 10,
+    backgroundColor: '#fff',
+    alignItems: 'flex-end',
+    alignContent: 'flex-end',
+    flexDirection: 'column',
   },
 
   title: {
@@ -136,35 +155,39 @@ const styles = StyleSheet.create({
   },
 
   icon1: {
-    width: 50,
-    height: 50,
-    right: -55,
-    top: 300,
+    // padding: 20,
+    // margin: 10,
+    top: 70,
+    width: 70,
+    height: 70,
+    // right: -55,
+    // top: 300,
     borderWidth: 1,
     borderColor: '#ef3f67',
     alignSelf: 'flex-start'
   },
 
   inputPublicacao: {
+    padding: 20,
+    // margin: 10,
     borderWidth: 1,
-    width: 250,
-    top: 250,
-    padding: 10,
-    marginBottom: 10,
-    borderBottomWidth: 1,
+    width: 258,
+    // borderBottomWidth: 1,
     borderColor: "#ef3f67",
-    alignSelf: 'flex-end'
+    alignContent: 'flex-end',
+
   },
 
   botao: {
-    top: 250,
+    // margin: 10,    
+    marginTop: 10,
+    padding: 10,
     width: 125,
     backgroundColor: '#ef3f67',
-    marginBottom: 30,
     borderWidth: 1,
     borderColor: '#ef3f67',
     borderRadius: 4,
-    alignSelf: 'flex-end'
+    alignContent: 'flex-end',
   },
 
   textoBotao: {

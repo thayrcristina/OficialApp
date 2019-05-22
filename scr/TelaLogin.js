@@ -4,8 +4,11 @@ import {
     StyleSheet,
     Text, TextInput,
     TouchableOpacity,
-    Image
+    Image,  
+    KeyboardAvoidingView,
+  
 } from 'react-native';
+
 import firebase from 'firebase';
 
 
@@ -22,6 +25,7 @@ export default class TelaLogin extends React.Component {
         email: '',
         senha: '',
         isAuthenticated: false,
+
     };
 
     login = async () => {
@@ -38,20 +42,26 @@ export default class TelaLogin extends React.Component {
         this.props.navigation.navigate("Inicio")
     }
 
+
     render() {
         return (
 
-            <View style={styles.container} >
+
+
+            <KeyboardAvoidingView style={styles.container} behavior="padding" >
+        
+        <View style={styles.login}>
 
                 <Image style={styles.logo}
                     source={require('../assets/logo.png')} />
-
-                <Text style={styles.textoInput}>Digite seu usuário e senha para acessar!</Text>
+                <Text style={styles.textoInput}>Email</Text>
                 <TextInput
                     style={styles.inputAcesso}
-                    placeholder={"Usuário"}
+                    placeholder={"email@dominio.com"}
                     value={this.state.email}
                     onChangeText={email => this.setState({ email })} />
+
+                <Text style={styles.textoInput}>Senha</Text>
                 <TextInput
                     style={styles.inputAcesso}
                     placeholder={"Senha"}
@@ -66,8 +76,9 @@ export default class TelaLogin extends React.Component {
                     onPress={() => this.props.navigation.navigate("Cadastro")}>
                     <Text style={styles.textoCadastro}>Não tem conta? Cadastre-se aqui!</Text>
                 </TouchableOpacity>
+                </View>
+                </KeyboardAvoidingView>
 
-            </View >
 
         );
     }
@@ -76,31 +87,52 @@ export default class TelaLogin extends React.Component {
 const styles = StyleSheet.create({
 
     container: {
+        padding: 1,
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ef3f67',
         alignItems: 'center',
         justifyContent: 'center'
     },
 
-    inputAcesso: {
-        top: -5,
-        width: 250,
-        margin: 10,
-        borderColor: '#000',
+    login: {
+        // padding: 10,
+        // flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        // width: 310,     
+        // height: 350,   
         borderWidth: 1,
-        borderRadius: 2
+        borderColor: '#ffdde5',
+        borderRadius: 4,
+        justifyContent: 'center'
+    },
+
+    inputAcesso: {
+        width: 290,
+        padding: 10,
+        margin: 10,
+        // top: -70,
+        fontSize: 15,
+        color: 'black',
+        alignSelf: 'center',
+        borderWidth: 1,
+        borderColor: "#ef3f67",
+        borderRadius: 4
     },
 
     botao: {
-        top: 8,
-        width: 250,
+        // top: 8,
+        width: 290,
+        padding: 10,
+        margin: 10,
         backgroundColor: "#ef3f67",
         borderWidth: 1,
-        borderRadius: 8
+        borderColor: "#ef3f67",
+        borderRadius: 4
     },
 
     cadastro: {
-        top: 15,
+        // top: 15,
         width: 250,
 
     },
@@ -114,15 +146,15 @@ const styles = StyleSheet.create({
 
     textoCadastro: {
         padding: 10,
-        top: 10,
-        color: 'black',
-        fontSize: 10,
+        // top: 10,
+        color: '#ef3f67',
+        fontSize: 15,
         fontWeight: 'bold',
         alignSelf: 'center',
     },
 
     textoCadAqui: {
-        top: 10,
+        // top: 10,
         color: '#ef3f67',
         fontSize: 10,
         fontWeight: 'bold',
@@ -130,15 +162,16 @@ const styles = StyleSheet.create({
     },
 
     textoInput: {
-        top: -10,
+        // top: -10,
+        margin: 10,
         fontSize: 15,
-        color: 'black',
+        color: '#ef3f67',
         fontWeight: 'bold',
-        alignSelf: 'center',
+        alignSelf: 'flex-start',
     },
 
     textoFacebook: {
-        top: 55,
+        // top: 55,
         fontSize: 15,
         color: 'black',
         fontWeight: 'bold',
@@ -150,8 +183,8 @@ const styles = StyleSheet.create({
 
     },
     logo: {
+        margin: 10,
         alignSelf: 'center',
-        top: -50,
         width: 110,
         height: 110
 
