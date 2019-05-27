@@ -6,11 +6,23 @@ import {
     Image,
     Text,
     ScrollView,
+    
 
 } from 'react-native';
-import { Button } from 'react-native-elements';
+
+import firebase from 'firebase';
 
 export default class TelaInicial extends React.Component {
+    // signOutUser = async () => {
+    //     try {
+    //         await firebase.auth().signOut();
+    //         this.props.navigation.navigate("Login")
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+        
+    // }
+
     static navigationOptions = ({ }) => {
         let headerTitle = 'Inicio';
         let headerTitleStyle = { color: 'white' };
@@ -114,6 +126,13 @@ export default class TelaInicial extends React.Component {
                         onPress={() => this.props.navigation.navigate("Ong")}>
                         <Image style={styles.icon}
                             source={require('../assets/ongs.png')} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity 
+                         onPress={() => this.props.navigation.navigate("Login")}>
+                        {/* onPress={this.signOutUser}> */}
+                        <Image style={styles.icon}
+                            source={require('../assets/sair.png')} />
                     </TouchableOpacity>
                     
                     </View>

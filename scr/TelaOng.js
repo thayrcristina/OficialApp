@@ -30,8 +30,8 @@ export default class TelaOng extends React.Component {
 
                 <View style={styles.containerCard}>
                     <Image source={require('../assets/ong-1.jpg')} style={styles.image} />
-                    <Text style={styles.tituloCard}> Juntas </Text>
-                    <Text style={styles.textDesc}> BLALSLBLSDPFLS NLAPGPSLPLBaBLPALFPALNPLVPAA</Text>
+                    <Text style={styles.tituloCard}> Artemis </Text>
+                    <Text style={styles.textDesc}> Para mais informações, clique em "Contactar"!</Text>
                     <TouchableOpacity style={styles.inputOng}>
                         <Text style={styles.textoInput}>Contactar</Text>
                     </TouchableOpacity>
@@ -39,8 +39,8 @@ export default class TelaOng extends React.Component {
 
                 <View style={styles.containerCard2}>
                     <Image source={require('../assets/ong-2.jpg')} style={styles.image} />
-                    <Text style={styles.tituloCard}> Juntas </Text>
-                    <Text style={styles.textDesc}> BLALSLBLSDPFLS NLAPGPSLPLBaBLPALFPALNPLVPAA</Text>
+                    <Text style={styles.tituloCard}>Fênix  </Text>
+                    <Text style={styles.textDesc}>  Para mais informações, clique em "Contactar"!</Text>
                     <TouchableOpacity style={styles.inputOng}>
                         <Text style={styles.textoInput}>Contactar</Text>
                     </TouchableOpacity>
@@ -48,8 +48,8 @@ export default class TelaOng extends React.Component {
 
                 <View style={styles.containerCard3}>
                     <Image source={require('../assets/ong-3.jpg')} style={styles.image} />
-                    <Text style={styles.tituloCard}> Juntas </Text>
-                    <Text style={styles.textDesc}> BLALSLBLSDPFLS NLAPGPSLPLBaBLPALFPALNPLVPAA</Text>
+                    <Text style={styles.tituloCard}>Instituto  </Text>
+                    <Text style={styles.textDesc}>  Para mais informações, clique em "Contactar"!</Text>
                     <TouchableOpacity style={styles.inputOng}>
                         <Text style={styles.textoInput}>Contactar</Text>
                     </TouchableOpacity>
@@ -58,7 +58,7 @@ export default class TelaOng extends React.Component {
                 <View style={styles.containerCard4}>
                     <Image source={require('../assets/ong-4.jpg')} style={styles.image} />
                     <Text style={styles.tituloCard}> Juntas </Text>
-                    <Text style={styles.textDesc}> BLALSLBLSDPFLS NLAPGPSLPLBaBLPALFPALNPLVPAA</Text>
+                    <Text style={styles.textDesc}>  Para mais informações, clique em "Contactar"!</Text>
                     <TouchableOpacity style={styles.inputOng}>
                         <Text style={styles.textoInput}>Contactar</Text>
                     </TouchableOpacity>

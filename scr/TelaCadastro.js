@@ -2,7 +2,7 @@ import React from 'react';
 import firebase from 'firebase';
 import TelaPublicacoes from '../scr/TelaPublicacoes'
 
-import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, View } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, View} from 'react-native';
 
 export default class TelaCadastro extends React.Component {
     static navigationOptions = ({ }) => {
@@ -75,12 +75,12 @@ export default class TelaCadastro extends React.Component {
                         style={styles.inputCadastro}
                         placeholder={"Email"}
                         onChangeText={email => this.setState({ email })} 
-                        onFocus={this.focus} 
                         value={this.email}
                     />
 
                     {/* <Text style={styles.textoCad}>Senha</Text> */}
                     <TextInput
+                        secureTextEntry={true}
                         style={styles.inputCadastro}
                         placeholder={"Senha"}
                         onChangeText={senha => this.setState({ senha })}

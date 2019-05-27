@@ -6,8 +6,10 @@ import {
     TouchableOpacity,
     Image,  
     KeyboardAvoidingView,
+    
   
 } from 'react-native';
+
 
 import firebase from 'firebase';
 
@@ -63,6 +65,7 @@ export default class TelaLogin extends React.Component {
 
                 <Text style={styles.textoInput}>Senha</Text>
                 <TextInput
+                    secureTextEntry={true}
                     style={styles.inputAcesso}
                     placeholder={"Senha"}
                     value={this.state.senha}
